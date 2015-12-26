@@ -38,4 +38,4 @@ with open('day14_input.txt', 'r') as f:
 
     sorted_results = sorted(results.items(), key=lambda x: x[1])
     print 'Distance traveled by the winning reindeer: '
-    print sorted_results[-1][-1]
+    print sorted_results
