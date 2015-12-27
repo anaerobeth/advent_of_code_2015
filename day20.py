@@ -37,22 +37,20 @@ def calculate_presents(house):
 
 def calculate_presents_with_cap(house, elf_tracker):
     all_factors = get_factors(house)
-    print all_factors
+
     for elf, visits in elf_tracker.items():
         if elf in all_factors:
             elf_tracker[elf] += 1
 
     for factor in all_factors:
         if elf_tracker[factor] > 50:
-            print "Elf {} has visited {} times".format(factor, elf_tracker[factor])
             all_factors.remove(factor)
-    print "new factor set: {}".format(all_factors)
     presents = reduce(lambda x, y: x + y, all_factors) * 11
 
     return presents, elf_tracker
 
 
-target = 2000
+target = 29000000
 
 elf_tracker = {}
 # i narrowed down the range by calculating presents for selected house numbers until the target is exceeded
@@ -64,11 +62,13 @@ elf_tracker = {}
 #         break
 
 
-for house in range(1, 150):
+for house in range(1, 2600000):
     elf_number = house
     elf_tracker[elf_number] = 0
 
     presents, elf_tracker = calculate_presents_with_cap(house, elf_tracker)
+
+    print "House {} received {} presents".format(house, presents)
 
     if presents >= target:
         print 'Lowest number of house with at least the target number of presents: {}'.format(house)
